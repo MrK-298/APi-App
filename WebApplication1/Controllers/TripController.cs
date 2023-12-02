@@ -20,9 +20,11 @@ namespace WebApplication1.Controllers
         {
             if (model != null) 
             {
+                var find = _context.Users.SingleOrDefault(p => p.Id == model.UserId);
                 var trip = new Trip
                 {
                     UserId = model.UserId,
+                    fullName = find.fullName,
                     distance = model.distance,
                     time = model.time,
                     timeBook = DateTime.Now,
@@ -66,12 +68,14 @@ namespace WebApplication1.Controllers
         public IActionResult AcceptTrip(AcceptTripViewModel model)
         {
             var trip = _context.Trips.SingleOrDefault(p => p.Id == model.TripId);
+            var find = _context.Users.SingleOrDefault(p => p.Id == model.DriverId);
             if (trip == null)
             {
                 return NotFound("Không có Trip nào được tìm thấy");
             }
             trip.status = "Đã nhận đơn";
             trip.DriverId = model.DriverId;
+            trip.driverName = find.fullName;
             _context.SaveChanges();
             return Ok("Accept Trip successful");
         }

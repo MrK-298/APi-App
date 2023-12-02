@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Trang chủ admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Admin Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Admin Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <div class="thong-tin-date">
+                <div class="container">
+                    <script language="JavaScript">
+                                                                        <!--
+                        // Store the date In avarlable
+                        d = new Date()
+                        dateText = ""
+                        // Get the cuurent day and convert it to the name of the day
+                        dayValue = d.getDay()
+                        if (dayValue == 0)
+                            dateText += "Chủ Nhật"
+                        else if (dayValue == 1)
+                            dateText += "Thứ hai"
+                        else if (dayValue == 2)
+                            dateText += "Thứ Ba"
+                        else if (dayValue == 3)
+                            dateText += "Thứ Tư"
+                        else if (dayValue == 4)
+                            dateText += "Thứ Năm"
+                        else if (dayValue == 5)
+                            dateText += "Thứ Sáu"
+                        else if (dayValue == 6)
+                            dateText += "Thứ Bảy"
+                        // Get the current date; if it's before 2000,add 1900
+                        dateText += ", ngày " + d.getDate()
+                        monthValue = d.getMonth()
+                        dateText += " "
+                        if (monthValue == 0)
+                            dateText += "tháng 1"
+                        if (monthValue == 1)
+                            dateText += "tháng 2"
+                        if (monthValue == 2)
+                            dateText += "tháng 3"
+                        if (monthValue == 3)
+                            dateText += "tháng 4­"
+                        if (monthValue == 4)
+                            dateText += "tháng 5"
+                        if (monthValue == 5)
+                            dateText += "tháng 6"
+                        if (monthValue == 6)
+                            dateText += "tháng 7"
+                        if (monthValue == 7)
+                            dateText += "tháng 8"
+                        if (monthValue == 8)
+                            dateText += "tháng 9"
+                        if (monthValue == 9)
+                            dateText += "tháng 10"
+                        if (monthValue == 10)
+                            dateText += "tháng 11"
+                        if (monthValue == 11)
+                            dateText += "tháng 12"
+                        // Get the current year; if it's before 2000, add 1900
+                        if (d.getYear() < 2000)
+                            dateText += " năm " + (1900 + d.getYear())
+                        else
+                            dateText += " năm " + (d.getYear())
+                        // Get the current minutes
+                        minuteValue = d.getMinutes()
+                        if (minuteValue < 10)
+                            minuteValue = "0" + minuteValue
+                        // Get the current hours
+                        hourValue = d.getHours()
+                        // Customize the greeting based on the current hours
+                        if (hourValue >= 5 && hourValue <= 10) {
+
+                            timeText = ". Chào buổi sáng và chúc bạn một ngày tốt lành!"
+                        }
+                        else if (hourValue > 10 && hourValue <= 12) {
+
+                            timeText = ". Chào mừng bạn, buổi trưa bình an bạn nhé!"
+                        }
+                        else if (hourValue >= 13 && hourValue < 17) {
+
+                            timeText = ". Chào mừng bạn, chúc bạn một buổi chiều vui vẻ!"
+                        }
+                        else if (hourValue >= 17 && hourValue < 18) {
+                            timeText = ". Chào mừng bạn, chúc bạn một buổi chiều vui vẻ!"
+                        }
+                        else if (hourValue >= 18 && hourValue < 21) {
+
+                            timeText = ". Chào mừng bạn, buổi tối vui vẻ nhé!"
+                        }
+                        else if (hourValue >= 21 && hourValue <= 24) {
+                            timeText = ". Chào mừng bạn, chúc bạn ngủ ngon và có giấc mơ đẹp!"
+                        }
+                        else if (hourValue >= 1 && hourValue < 5) {
+                            timeText = ". Chúc bạn một ngày vui vẻ!"
+                        }
+                        document.write(dateText + "" + timeText + "")
+
+                    </script>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>15,000</h3>
+
+                        <p>Số lượt truy cập</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>75%<sup style="font-size: 20px">%</sup></h3>
+
+                        <p>Tỷ lệ đặt xe</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>44</h3>
+
+                        <p>Số khách đang truy cập</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>3%</h3>
+
+                        <p>Tỷ lệ hủy đơn</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.card-body -->
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->

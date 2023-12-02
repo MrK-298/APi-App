@@ -1,0 +1,112 @@
+﻿@model IPagedList<WebApplication1.Data.EF.PriceTrip>
+@using X.PagedList;
+@using WebApplication1.Data;
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewBag.Title = "Price";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Price Trip </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">@ViewBag.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách @ViewBag.Title</h3>
+
+
+        </div>
+
+
+
+
+
+
+        <div class="card-body">
+
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        @if (Model != null && Model.Any())
+                        {
+                            var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+                            foreach (var item in Model)
+                            {
+                                <h3 id=" trow_@item.Id">
+                                    Giá: @WebApplication2.Functions.Common.FormatNumber(@item.Price) Vnđ
+                                </h3>
+                                <div class="icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div> <br />
+                                <a href="/price/edit/@item.Id" class="small-box-footer">
+                                    Thay đổi <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            }
+                        }
+
+
+
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        @if (Model != null && Model.Any())
+                        {
+                            var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+                            foreach (var item in Model)
+                            {
+                                <h3 id=" trow_@item.Id">
+                                    Giá: @WebApplication2.Functions.Common.FormatNumber(@item.PriceLow) Vnđ
+                                </h3>
+                                <div class="icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div> <br />
+                                <a href="/price/edit/@item.Id" class="small-box-footer">
+                                    Thay đổi <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            }
+                        }
+
+
+
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->

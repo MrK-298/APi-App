@@ -1,0 +1,55 @@
+﻿/*--------------------------------------------------------------------- import Files ---------------------------------------------------------------------*/
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-PoppinsLightItalic.eot');
+    src: url('../fonts/SVN-PoppinsLightItalic.eot?#iefix') format('embedded-opentype'), url('../fonts/SVN-PoppinsLightItalic.woff2') format('woff2'), url('../fonts/SVN-PoppinsLightItalic.woff') format('woff'), url('../fonts/SVN-PoppinsLightItalic.ttf') format('truetype'), url('../fonts/SVN-PoppinsLightItalic.svg#SVN-PoppinsLightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-PoppinsThinItalic.eot');
+    src: url('../fonts/SVN-PoppinsThinItalic.eot?#iefix') format('embedded-opentype'), url('../fonts/SVN-PoppinsThinItalic.woff2') format('woff2'), url('../fonts/SVN-PoppinsThinItalic.woff') format('woff'), url('../fonts/SVN-PoppinsThinItalic.ttf') format('truetype'), url('../fonts/SVN-PoppinsThinItalic.svg#SVN-PoppinsThinItalic') format('svg');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-PoppinsMediumItalic.eot');
+    src: url('../fonts/SVN-PoppinsMediumItalic.eot?#iefix') format('embedded-opentype'), url('../fonts/SVN-PoppinsMediumItalic.woff2') format('woff2'), url('../fonts/SVN-PoppinsMediumItalic.woff') format('woff'), url('../fonts/SVN-PoppinsMediumItalic.ttf') format('truetype'), url('../fonts/SVN-PoppinsMediumItalic.svg#SVN-PoppinsMediumItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-PoppinsSemiBoldItalic.eot');
+    src: url('../fonts/SVN-PoppinsSemiBoldItalic.eot?#iefix') format('embedded-opentype'), url('../fonts/SVN-PoppinsSemiBoldItalic.woff2') format('woff2'), url('../fonts/SVN-PoppinsSemiBoldItalic.woff') format('woff'), url('../fonts/SVN-PoppinsSemiBoldItalic.ttf') format('truetype'), url('../fonts/SVN-PoppinsSemiBoldItalic.svg#SVN-PoppinsSemiBoldItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+body {
+    color: #666666;
+    font-size: 14px;
+    font-family: 'SVN-Poppins', sans-serif;
+    line-height: 1.80857;
+    font-weight: normal;
+    overflow-x: hidden;
+    padding: 20px;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-bottom: 0.5rem;
+    font-family: 'SVN-Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.1;
+    color: #151515;
+}
+

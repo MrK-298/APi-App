@@ -11,6 +11,7 @@ namespace WebApplication1.Data.EF
             public int Id { get; set; }
 
             public int UserId { get; set; }
+            public string fullName { get; set; }
 
             public string startLocation { get; set; }
 
@@ -31,6 +32,7 @@ namespace WebApplication1.Data.EF
             public string status { get; set; }
 
             public int? DriverId { get; set; }
+            public string? driverName { get; set; }
             public bool? isPaid { get; set; }
             public string? locationIP { get; set; }
 

@@ -1,0 +1,95 @@
+﻿@model WebApplication1.Data.EF.PriceTrip
+@{
+    ViewBag.Title = "Cập nhật tin tức";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thay sao cho phù hợp nhen</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Cập nhật</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        @if (Model != null)
+                        {
+                            <div class="bs-stepper-content">
+                                @using (Html.BeginForm("Edit", "Price", FormMethod.Post, new { }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+
+                                <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Price / 1km</label>
+                                        @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Price / 1km</label>
+                                        @Html.TextBoxFor(x => x.PriceLow, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <a style="background-color: red;" href="/admin/price" class="btn btn-primary">Quay lại</a>
+                                        <button style="background-color: green;" type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                                }
+                                <!-- your steps content here -->
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace('txtDetail', {
+                customConfig: '/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+        function BrowseServer(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                document.getElementById(field).value = fileUrl;
+            };
+            finder.popup();
+        }
+    </script>
+}

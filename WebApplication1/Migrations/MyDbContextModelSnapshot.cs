@@ -78,7 +78,14 @@ namespace WebApplication1.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("driverName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("endLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("fullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -136,6 +143,15 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("VerificationCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("emailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("fullName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("imageBike")

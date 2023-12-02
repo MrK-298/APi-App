@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -43,15 +39,15 @@ namespace WebApplication1.Controllers
                 if (passwordVerificationResult == PasswordVerificationResult.Success)
                 {
                     var userrole = _context.userRoles.SingleOrDefault(p => p.userId == user.Id);
-                    var role = _context.Roles.SingleOrDefault(p=>p.roleId==userrole.roleId);
+                    var role = _context.Roles.SingleOrDefault(p=>p.roleId == userrole.roleId);
                     var claims = new List<Claim>
-                {
-                    new Claim("Username", user.userName),
-                    new Claim("Id", user.Id.ToString()),
-                    new Claim("Email", user.Email),
-                    new Claim("PhoneNumber", user.phoneNumber ),
-                    new Claim("Role", role.roleName)
-                };
+                    {
+                        new Claim("Username", user.userName),
+                        new Claim("Id", user.Id.ToString()),
+                        new Claim("Email", user.Email),
+                        new Claim("PhoneNumber", user.phoneNumber ),
+                        new Claim("Role", role.roleName)
+                    };
 
 
                     var token = new JwtSecurityToken(

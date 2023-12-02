@@ -1,0 +1,253 @@
+﻿@model IPagedList<WebApplication1.Data.EF.Trip>
+@using X.PagedList;
+@using WebApplication1.Data;
+@using X.PagedList.Mvc.Core;
+
+
+
+@{
+    ViewBag.Title = "Danh sách đơn đặt xe";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách đơn đặt xe</h3>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                @using (Html.BeginForm("Index", "Booking", FormMethod.Get, new { }))
+                {
+                    <div class="input-group input-group-sm">
+                        @Html.TextBox("SearchText", "", new { @class = "form-control" })
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-info btn-flat">Tìm kiếm</button>
+                        </span>
+                        <select id="filterStatus" style="float:right">
+                            @if (ViewBag.filterStatus == "")
+                            {
+                                <option selected value="">Tất cả</option>
+                            }
+                            else
+                            {
+                                <option value="">Tất cả</option>
+                            }
+                            @if (ViewBag.filterStatus == "Hoàn thành")
+                            {
+                                <option selected value="Hoàn thành">Hoàn thành</option>
+                            }
+                            else
+                            {
+                                <option value="Hoàn thành">Hoàn thành</option>
+                            }
+                            @if (ViewBag.filterStatus == "Đang chạy")
+                            {
+                                <option selected value="Đang chạy">Đang chạy</option>
+                            }
+                            else
+                            {
+                                <option value="Đang chạy">Đang chạy</option>
+                            }
+                            @if (ViewBag.filterStatus == "Chưa nhận")
+                            {
+                                <option selected value="Chưa nhận">Chưa nhận</option>
+                            }
+                            else
+                            {
+                                <option value="Chưa nhận">Chưa nhận</option>
+                            }
+                            @if (ViewBag.filterStatus == "Đã nhận đơn")
+                            {
+                                <option selected value="Đã nhận đơn">Đã nhận đơn</option>
+                            }
+                            else
+                            {
+                                <option value="Đã nhận đơn">Đã nhận đơn</option>
+                            }
+                            @if (ViewBag.filterStatus == "Đã hủy")
+                            {
+                                <option selected value="Đã hủy">Đã hủy</option>
+                            }
+                            else
+                            {
+                                <option value="Đã hủy">Đã hủy</option>
+                            }
+                        </select>
+                    </div>
+
+                }
+
+            </div>
+            <div class="col-6">
+                @using (Html.BeginForm("ExportToExcel", "Booking", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-file-csv"></i>  Export to Excel </button>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card-body">
+                    <table class="table table-bordered" id="tripTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên khách hàng</th>
+                                <th>Trạng thái</th>
+                                <th>Tài xế</th>
+                                <th>Thời gian đặt</th>
+
+
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{
+                                if (Model != null && Model.Any())
+                                {
+                                    var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+                                    foreach (var item in Model)
+                                    {
+
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                            <td>@item.Id</td>
+                                            <td>@item.fullName</td>
+                                            <td>
+                                                @if (item.status == "Hoàn thành")
+                                                {
+                                                    <i class="fas fa-circle text-success"></i>
+                                                }
+                                                else if (item.status == "Đang chạy")
+                                                {
+                                                    <i class="fas fa-circle text-warning"></i>
+                                                }
+                                                else if (item.status == "Chưa nhận")
+                                                {
+                                                    <i class="fas fa-circle text-danger"></i>
+                                                }
+                                                else if (item.status == "Đã hủy")
+                                                {
+                                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="far fa-circle" style="color:orange;"></i>
+                                                }
+                                                @item.status
+                                            </td>
+                                            <td> @item.driverName</td>
+                                            <td> @item.timeBook</td>
+
+                                        </tr>
+
+                                        <tr class="expandable-body">
+                                            <td colspan="10">
+                                                <p>
+
+                                                    Nơi đi:   @item.startLocation <br />
+                                                    Nơi đến:   @item.endLocation  <br />
+                                                    Khoảng cách  @item.distance      <br />
+                                                    Giá :  @WebApplication2.Functions.Common.FormatNumber(item.price) <br />
+                                                    Thời gian đặt @item.time  <br />
+                                                    Thời gian tạo đơn @item.orderDate  <br />
+                                                    Mã Số người dùng:@item.UserId  <br />
+                                                    Mã số tài xế    :    @item.DriverId
+
+                                                    @if (item.status == "Chưa nhận")
+                                                    {
+                                                        <br /> <button id="error-trip" type="button" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Hủy đơn</button>
+                                                    }
+
+                                                </p>
+
+                                            </td>
+                                        </tr>
+
+
+                                    }
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-6"></div>
+                        <div class="col-6" style="text-align:right;">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<script src="~/Content/clients/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/Content/clients/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<!-- AdminLTE for demo purposes -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Content/js/Excel.js"></script>
+
+<script>
+    debugger;
+    $(function () {
+        $("#filterStatus").change(function () {
+            var filterStatus = $(this).val();
+            const url = '@Url.Action("Index", "Booking")';
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: { filterStatus: filterStatus },
+                success: function (rs) {
+                    // Xử lý kết quả trả về
+                    $('body').html(rs);
+                },
+                error: function (rs) {
+                    alert("Không tìm thấy đơn");
+                }
+            });
+        });
+    });
+
+    const errorBtns = document.querySelectorAll('#error-trip');
+    errorBtns.forEach(errorBtn => {
+        errorBtn.addEventListener('click', function (event) {
+            const tripId = $(this).data('id');
+            const url = '@Url.Action("ErrorTrip", "Booking")';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: { id: tripId },
+                success: function (rs) {
+                    if (rs.success) {
+                        window.location.href = "/Manager/Booking/Index";
+                        alert('Hủy đơn thành công!.');
+                    }
+                },
+                error: function (rs) {
+                    alert('Hủy đơn không thành công!.');
+                    location.reload(true);
+                }
+            });
+        });
+    });
+</script>
+

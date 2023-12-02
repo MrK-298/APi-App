@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
 
 namespace WebApplication1.Data.EF
 {
@@ -22,7 +21,7 @@ namespace WebApplication1.Data.EF
 
         [Required]
         [MaxLength(10)]
-        [RegularExpression(@"^0\d{9}$", ErrorMessage = "Số điện thoại không hợp lệ")]
+        [RegularExpression(@"^(0|84)([0-9]{9})$", ErrorMessage = "Xin vui lòng nhập đúng định dạng số điện thoại")]
         public string phoneNumber { get; set; }
 
         public string? Avatar { get; set; }
@@ -32,6 +31,10 @@ namespace WebApplication1.Data.EF
         public bool? isDelete { get; set; }
         public int? Point { get; set; }
         public bool? lockOutEndDateUtc { get; set; }
+
+        public bool? emailConfirmed { get; set; }
+        public string? fullName { get; set; }
+        public string? address { get; set; }
 
         public string? VerificationCode { get; set; }
         public ICollection<Trip> Trips { get; set; }
