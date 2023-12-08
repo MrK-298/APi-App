@@ -36,7 +36,7 @@ namespace WebApplication1.Controllers
                 };
                 _context.Trips.Add(trip);
                 _context.SaveChanges();
-                return Ok("Booking successful");
+                return Ok(trip);
             }
             return BadRequest("Booking failed");
         }

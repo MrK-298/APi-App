@@ -42,7 +42,7 @@ namespace WebApplication1.Controllers
                     var role = _context.Roles.SingleOrDefault(p=>p.roleId == userrole.roleId);
                     var claims = new List<Claim>
                     {
-                        new Claim("Username", user.userName),
+                        new Claim("Fullname", user.fullName),
                         new Claim("Id", user.Id.ToString()),
                         new Claim("Email", user.Email),
                         new Claim("PhoneNumber", user.phoneNumber ),
@@ -82,7 +82,9 @@ namespace WebApplication1.Controllers
                     userName = model.userName,
                     passWord = new PasswordHasher<User>().HashPassword(null, model.passWord),
                     Email = model.Email,
-                    phoneNumber = model.phoneNumber
+                    phoneNumber = model.phoneNumber,
+                    fullName = model.fullName,
+                    address = model.address,
                 };
                 SendMail.SendEmail(model.Email, "Xác nhận tài khoản", "Bạn đã xác nhận thành công", "");
                 _context.Users.Add(user);
@@ -174,7 +176,7 @@ namespace WebApplication1.Controllers
                 var jwtToken = (JwtSecurityToken)validatedToken;
 
                 // Extract information from the token as needed
-                var username = jwtToken.Claims.First(x => x.Type == "Username").Value;
+                var fullname = jwtToken.Claims.First(x => x.Type == "Fullname").Value;
                 var userId = jwtToken.Claims.First(x => x.Type == "Id").Value;
                 var email = jwtToken.Claims.First(x => x.Type == "Email").Value;
                 var phoneNumber = jwtToken.Claims.First(x => x.Type == "PhoneNumber").Value;
@@ -182,7 +184,7 @@ namespace WebApplication1.Controllers
 
                 return Ok(new
                 {
-                    Username = username,
+                    FullName = fullname,
                     UserId = userId,
                     Email = email,
                     PhoneNumber = phoneNumber,
@@ -251,13 +253,13 @@ namespace WebApplication1.Controllers
             }
             user.Email = model.email;
             user.phoneNumber = model.phoneNumber;
-            user.userName = model.Name;
+            user.fullName = model.Name;
             _userRepository.UpdateUser(user);
             var userrole = _context.userRoles.SingleOrDefault(p => p.userId == user.Id);
             var role = _context.Roles.SingleOrDefault(p => p.roleId == userrole.roleId);
             var updatedClaims = new List<Claim>
             {
-                new Claim("Username", user.userName),
+                new Claim("Fullname", user.fullName),
                 new Claim("Id", user.Id.ToString()),
                 new Claim("Email", user.Email),
                 new Claim("PhoneNumber", user.phoneNumber ),

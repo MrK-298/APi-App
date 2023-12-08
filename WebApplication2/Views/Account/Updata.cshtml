@@ -1,0 +1,149 @@
+﻿@using System.Security.Claims;
+@model WebApplication2.Models.View.UpdataViewModel
+@{
+    ViewBag.Title = "Updata";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <link href="~/Content/css/Style2.css" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+        textarea {
+            height: 100px;
+        }
+
+        img {
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #dfdfdf;
+        }
+    </style>
+
+</head>
+<body>
+
+    <form action="/Account/Updata" method="post" role="form" class="signup-form" enctype="multipart/form-data">
+        @{
+            @Html.AntiForgeryToken()
+            <label for="avatar">Avatar:</label>
+            if (User.FindFirstValue("Avatar") != null)
+            {
+                <img alt="User Image" src="~/Content/ImagesAcc/@User.FindFirstValue("Avatar")" />
+            }
+            else
+            {
+                <img alt="User Image" src="~/Content/th.jpg" />
+            }
+            <label></label>
+            <input type="file" name="ImageFile" id="ImageFile" value="@User.FindFirstValue("Avatar")" accept=".png, .jpg, .jpeg" />
+            <style>
+                .highlight-label {
+                    font-weight: bold;
+                    color: #007bff; /* Change this color to the desired highlight color */
+                    margin-right: 10px; /* Add some spacing between label and input */
+                }
+            </style>
+
+            <label for="Point">Point:</label>
+            <input class="highlight-label" type="text" id="Point" name="Point" value="@User.FindFirstValue("Avatar")" readonly>
+
+            <label for="UserName">User Name:</label>
+            <input class="highlight-label" onclick="showAlert()" type="text" id="UserName" name="UserName" value="@User.FindFirstValue("Username")" readonly>
+
+            <label for="Email">Email:</label>
+            <input class="highlight-label" onclick="showAlert()" type="email" id="Email" name="Email" value="@User.FindFirstValue("Email")" readonly>
+
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="FullName" name="FullName" value="@User.FindFirstValue("Fullname")">
+            @Html.ValidationMessageFor(row => row.FullName)
+            <label for="phone">Phone:</label>
+            <input type="tel" id="Phone" name="Phone" value="@User.FindFirstValue("PhoneNumber")">
+            @Html.ValidationMessageFor(row => row.Phone)
+            <label for="address">Address:</label>
+            <input type="text" id="Address" name="Address" value="@User.FindFirstValue("Address")">
+            @Html.ValidationMessageFor(row => row.Address)
+            <input type="submit" value="Submit">
+        }
+        <hr />
+        <div style="float:right">
+            <a href="/Manage/ChangePassword">Đổi mật khẩu</a>
+        </div>
+    </form>
+    <script src="~/Content/Register/js/bootstrap.min.js"></script>
+    <script src="~/Content/Register/js/jquery.min.js"></script>
+    <script src="~/Content/Register/js/main.js"></script>
+    <script src="~/Content/Register/js/popper.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
+<script>
+    function showAlert() {
+        alert("Đây là thuộc tính không thể sửa đổi!");
+        document.getElementById("UserName").readOnly = true;
+    }
+</script>

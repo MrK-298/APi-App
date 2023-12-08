@@ -64,13 +64,19 @@ namespace WebApplication2.Controllers
                     }
                     else
                     {
+                        var userRole = _context.userRoles.SingleOrDefault(p => p.userId == user.Id);
+                        var role = _context.Roles.SingleOrDefault(p => p.roleId == userRole.roleId);
                         var claims = new List<Claim>
                         {
-                            new Claim("Username", user.fullName),
+                            new Claim("Point", user.Point.ToString() ?? ""),
+                            new Claim("Username", user.userName),
+                            new Claim("Fullname", user.fullName),
                             new Claim("Id", user.Id.ToString()),
                             new Claim("Email", user.Email),
                             new Claim("PhoneNumber", user.phoneNumber ),
+                            new Claim("Address", user.address),
                             new Claim("Image",user.Avatar ?? ""),
+                            new Claim("Role",role.roleName),
                         };
                         var claimsIdentity = new ClaimsIdentity(
                             claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -162,6 +168,51 @@ namespace WebApplication2.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Updata()
+        {
+            return View();
+        }
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Updata(UpdataViewModel model, IFormFile imageFile)
+        {
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                var fileName = Path.GetFileName(imageFile.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Content", "ImagesAcc", fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    imageFile.CopyTo(stream);
+                }
+                model.Avatar = fileName;
+            }
 
+            if (!ModelState.IsValid)
+            {
+                var user = _context.Users.SingleOrDefault(p=>p.Email==model.Email);
+
+                if (user != null)
+                {
+
+                    user.fullName = model.FullName;
+                    user.phoneNumber = model.Phone;
+                    user.address = model.Address;
+                    user.Avatar = model.Avatar;
+                    _userRepository.UpdateUser(user);
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                    }
+                    return RedirectToAction("Login", "Account");
+                }
+            }
+
+            return View(model);
+        }
     }
 }
